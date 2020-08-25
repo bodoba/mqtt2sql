@@ -35,7 +35,7 @@
 /* ----------------------------------------------------------------------------------- *
  * MQTT broker connection
  * ----------------------------------------------------------------------------------- */
-#define MQTT_ADDRESS  "192.168.100.26"
+#define MQTT_ADDRESS   "127.0.0.1"
 #define MQTT_PORT      1883
 #define MQTT_KEEPALIVE 60
 
@@ -43,7 +43,7 @@
  * Default values for configurable parameter
  * ----------------------------------------------------------------------------------- */
 #define DEBUG        0                           /* no debug info by default           */
-#define PID_FILE     "/var/run/yardcontrol.pid"  /* damon stores its pid here          */
+#define PID_FILE     "/var/run/mqtt2sql.pid"     /* damon stores its pid here          */
 #define MAX_PAYLOAD  512                         /* max length of the payload string   */
 #define MAX_BRIDGE   128                         /* max mapping table entries          */
 
@@ -72,7 +72,7 @@ typedef struct    bridge {
     const char    *tableName;
     char          *lastValue;
     time_t        lastRecord;
-    unsigned int  type;            // Save on 1: Change or 2:Update
+    unsigned int  type;       
 } bridge_t;
 
 #endif /* mqtt2sql_h */
