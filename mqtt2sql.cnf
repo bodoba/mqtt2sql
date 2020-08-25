@@ -1,0 +1,56 @@
+# *********************************************************************************** #
+#                                                                                     #
+#  Copyright (c) 2020 by Bodo Bauer <bb@bb-zone.com>                                  #
+#                                                                                     #
+#  This program is free software: you can redistribute it and/or modify               #
+#  it under the terms of the GNU General Public License as published by               #
+#  the Free Software Foundation, either version 3 of the License, or                  #
+#  (at your option) any later version.                                                #
+#                                                                                     #
+#  This program is distributed in the hope that it will be useful,                    #
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of                     #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                      #
+#  GNU General Public License for more details.                                       #
+#                                                                                     #
+#  You should have received a copy of the GNU General Public License                  #
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.              #
+# *********************************************************************************** #
+
+# *********************************************************************************** #
+# Database Server Connection
+# *********************************************************************************** #
+
+SQL_ADDRESS    127.0.0.1           # Address of SQL server
+SQL_DATABASE   mqtt2sql            # Database name to connect to
+SQL_USERNAME   mqtt2sql            # SQL Server Username
+SQL_PASSWORD   joshua              # SQL Server password
+
+# *********************************************************************************** #
+# MQTT Broker Connection
+# *********************************************************************************** #
+
+MQTT_ADDRESS     127.0.0.1         # MQTT borker address
+MQTT_PORT        1883              # MQTT broker port
+MQTT_KEEPALIVE   60                # Keepalive setting foe MQTT broker
+
+# *********************************************************************************** #
+# MQTT Topic to SQL Table mapping
+# -------------------------------
+# <policy> <topic> <table>
+#
+# Policy:
+#
+#   UPDATE - The payload of <topic> is written to <table>.value every time an
+#            update is received
+#   CHANGE - The payload of <topic> is written to <table>.value only if it changed
+#            compared to tha last received value
+#
+# CREATE TABLE `<DBNAME>`.`<TABLENAME>` (
+#           `time` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+#           `value` DOUBLE NULL DEFAULT NULL , PRIMARY KEY (`time`)
+# ) ENGINE = InnoDB;
+#
+# *********************************************************************************** #
+
+CHANGE  /test/double01  double_01
+UPDATE  /test/text01    string_01
